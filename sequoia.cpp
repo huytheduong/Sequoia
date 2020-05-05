@@ -132,14 +132,14 @@ void SequoiaNode::insert(int x)
 void SequoiaNode::updateHeight()
 {
   // traverses tree up from the current node
-  for (SequoiaNode* current = this; current != nullptr; current = current->parent)
+  for(SequoiaNode* current = this; current != nullptr; current = current->parent)
   {
     int leftH = current->left->getHeight(), rightH = current->right->getHeight();
 
     // sets height to max of left subheight and right subheight
     current->height = leftH;
 
-    if (current->height < rightH)
+    if(current->height < rightH)
 
       current->height = rightH;
 
@@ -169,7 +169,7 @@ SequoiaNode* SequoiaNode::remove()
         parent->right = nullptr;
       }
   }
-  else if (left != nullptr && right == nullptr)
+  else if(left != nullptr && right == nullptr)
   {
     left->parent = parent;
 
@@ -182,7 +182,7 @@ SequoiaNode* SequoiaNode::remove()
       parent->right = left;
     }
   }
-  else if (left == nullptr && right != nullptr)
+  else if(left == nullptr && right != nullptr)
   {
     right->parent = parent;
 
@@ -203,7 +203,7 @@ SequoiaNode* SequoiaNode::remove()
 
     int temp = value;
 
-    while (swap->right != nullptr)
+    while(swap->right != nullptr)
 
       swap = swap->right;
 
@@ -217,7 +217,7 @@ SequoiaNode* SequoiaNode::remove()
   left = right = nullptr;
 
   // if the node removed in this call, update height and tallness
-  if (bDel)
+  if(bDel)
   {
     parent->updateHeight();
 
@@ -233,7 +233,7 @@ bool SequoiaNode::rotate()
 
   int leftH = left->getHeight(), rightH = right->getHeight();
 
-  if (leftH >= 2 * rightH || rightH >= 2 * leftH)
+  if(leftH >= 2 * rightH || rightH >= 2 * leftH)
   {
     return false; // good already
   }
@@ -241,11 +241,11 @@ bool SequoiaNode::rotate()
   {
     bool bCase1 = (leftH >= rightH);
 
-    if (bCase1) // rotate to the left
+    if(bCase1) // rotate to the left
     {
-      if (bParent)
+      if(bParent)
       {
-        if (bInsLeft)
+        if(bInsLeft)
         {
           parent->left = right;
         }
@@ -263,16 +263,16 @@ bool SequoiaNode::rotate()
 
       right = rightLeft;
 
-      if (rightLeft != nullptr)
+      if(rightLeft != nullptr)
       {
         rightLeft->parent = this;
       }
     }
     else // rotate to the right
     {
-      if (bParent)
+      if(bParent)
       {
-        if (bInsLeft)
+        if(bInsLeft)
         {
           parent->left = left;
         }
@@ -290,7 +290,7 @@ bool SequoiaNode::rotate()
 
       left = leftRight;
 
-      if (leftRight != nullptr)
+      if(leftRight != nullptr)
       {
         leftRight->parent = this;
       }
@@ -308,7 +308,7 @@ bool SequoiaNode::rotate()
 // If not implementing, must fix height and tallness elsewhere
 void SequoiaNode::fixBalanceInsert()
 {
-  for (SequoiaNode* current = this; current != nullptr; current = current->parent)
+  for(SequoiaNode* current = this; current != nullptr; current = current->parent)
 
     current->rotate();
 }
